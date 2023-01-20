@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+    int a[3][3],i,j,sum[3];
+    sum[0]=0;
+    sum[1]=0;
+    sum[2]=0;
+    printf("enter the elements:\n");
+    for (i=0;i<3;i++)
+    {
+        for (j=0;j<3;j++)
+        {
+            scanf("%d",&a[i][j]);
+        }
+    }
+    
+    for (i=0;i<3;i++)
+    {
+        for (j=0;j<3;j++)
+        {
+            sum[i]=sum[i]+a[j][i];
+        }
+    }
+    
+    for (i=0;i<3;i++)
+    {
+        for (j=0;j<3;j++)
+        {
+            printf("d\t",a[i][j]);
+        }
+        printf("\n");
+    }
+    
+    for (i=0;i<3;i++)
+    {
+        printf("%d\t",sum[i]);
+    }
+    getch();
+}
+    
+ 
