@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<conio.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+void llt(struct node *head)
+{
+    struct node *ptr=head;
+    printf("Element: %d\n",ptr->data);
+    ptr=ptr->next;
+    
+    while (ptr != head)
+    {
+        printf("Element: %d\n", ptr->data);
+        ptr = ptr->next;
+    }
+}
+
+//case 1:Insertion At First
+struct node *insertAtFirst(struct node *head,int data)
+{
+    struct node *ptr;
+    ptr=(struct node *)malloc(sizeof(struct node));
+    struct node *p=head;
+    while (p->next != head)
+    {
+        p=p->next;
+    }
+    p->next=ptr;
+    ptr->data=data;
+    ptr->next=head;
+    return ptr;
+}
+
+//case 2: Insertion at Index
+struct node *insertAtIndex(struct node *head,int index,int data)
+{
+    struct node *ptr=(struct node *)malloc(sizeof(struct node));
+    ptr->data=data;
+    struct node *p=head;
+    int i=0;
+    for (i=0;i<index-1;i++)
+    {
+        p=p->next;
+    }
+    
+    ptr->next=p->next;
+    p->next=ptr;
+    return head;
+}
+//case 3:Insert At End
+struct node *insertAtEnd(struct node *head,int data)
+{
+    struct node *ptr=(struct node *)malloc(sizeof(struct node));
+    struct node *p=head;
+    while (p->next !=head)
+    {
+        p=p->next;
+    }
+    ptr->data=data;
+    p->next=ptr;
+    ptr->next=head;
+    
+    return head;
+}
+//case 4:Insert in beween
+struct node *insertInBetween(struct node *head,struct node *prevNode,int data)
+{
+    struct node *ptr=(struct node *)malloc(sizeof(struct node));
+    struct node *p=head;
+    while (p != prevNode)
+    {
+        p=p->next;
+    }
+    ptr->data=data;
+    ptr->next=p->next;
+    p->next=ptr;
+    return head;
+}
+
+
+int main()
+{
+    struct node *head;
+    struct node *second;
+    struct node *third;
+    struct node *fourth;
+    
+    clrscr();
+
+    // Allocate memory for nodes in the linked list in Heap
+    head = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
+    fourth = (struct node *)malloc(sizeof(struct node));
+
+    // Link first and second nodes
+    printf("Enter the data in the first Node:  ");
+    scanf("%d",&head->data);
+    head->next = second;
+
+    // Link second and third nodes
+    printf("Enter the Data in the Second Node: ");
+    scanf("%d",&second->data);
+    second->next = third;
+
+    // Link third and fourth nodes
+    printf("Ener the Data in the Third Node: ");
+    scanf("%d",&third->data);
+    third->next = fourth;
+
+    // Terminate the list at the third node
+    printf("Enter the data in The Fourth Node: ");
+    scanf("%d",&fourth->data);
+    fourth->next = head;
+
+    printf("Linked list before insertion\n");
+    llt(head);
+    struct node *ptr=head;
+    // head= insertAtFirst(head,4);
+   // head=insertAtIndex(head,2,5);
+    printf("Linked list after deletion\n");
+  //  head=insertAtEnd(head,78);
+  head=insertInBetween(head,second,69);
+    llt(head);
+
+    return 0;
+}
