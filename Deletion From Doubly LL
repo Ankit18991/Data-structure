@@ -1,0 +1,173 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<conio.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+
+void llt(struct node *head)
+{
+    struct node *ptr=head;
+    while(ptr != NULL)
+    {
+    printf("Element: %d\n",ptr->data);
+    ptr=ptr->next;
+    }
+    printf("the reverse LL is:\n");
+    ptr=head;
+    
+    while (ptr->next != NULL)
+    {
+        ptr=ptr->next;
+    }
+    
+    struct node *p=ptr;
+    
+    while (p != NULL)
+    {
+        printf("Element: %d\n", p->data);
+        p= p->prev;
+    }
+    
+}
+
+//case 1:Delete At First
+struct node *deleteAtFirst(struct node *head)
+{
+    struct node *ptr=head;
+    struct node *p=head->next;
+    
+    p->prev=NULL;
+    ptr->next=NULL;
+   
+       return p;
+}
+
+//case 2: Deletion at Index
+struct node *deleteAtIndex(struct node *head,int index)
+{
+    
+    struct node *p=head;
+    struct node *q=head->next;
+    struct node *r=q->next;
+    int i=0;
+    
+    for (i=0;i<index-1;i++)
+    {
+        p=p->next;
+        q=q->next;
+        r=r->next;
+    }
+    
+    p->next=q->next;
+    r->prev=p;
+    free(q);
+    
+    return head;
+}
+//case 3:Deletion At End
+struct node *deleteFromEnd(struct node *head)
+{
+    
+    struct node *p=head;
+    struct node *q=head->next;
+    
+    while (q->next !=NULL)
+    {
+        p=p->next;
+        q=q->next;
+    }
+    
+    p->next=NULL;
+    q->prev=NULL;
+    free(q);
+    
+    return head;
+}
+//case 4:Delete the node of which data has been entered
+
+struct node *deleteFromData(struct node *head,int data)
+{
+    
+    struct node *p=head;
+    struct node *q=head->next;
+    struct node *r=q->next;
+    
+    while (q->next != NULL && q->data !=data)
+    {
+        p=p->next;
+        q=q->next;
+        r=r->next;
+    }
+    
+    if (q->data==data)
+    {
+            p->next=q->next;
+            r->prev=p;
+            free(q);
+    }
+    else
+    {
+            printf("Data Not Found::::))) 404 Error");
+    }
+            
+    return head;
+}
+
+
+int main()
+{
+    struct node *head;
+    struct node *second;
+    struct node *third;
+    struct node *fourth;
+    
+    
+
+    // Allocate memory for nodes in the linked list in Heap
+    head = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
+    fourth = (struct node *)malloc(sizeof(struct node));
+
+    // Link first and second nodes
+    printf("Enter the data in the first Node:  ");
+    scanf("%d",&head->data);
+    head->prev=NULL;
+    head->next = second;
+
+    // Link second and third nodes
+    printf("Enter the Data in the Second Node: ");
+    scanf("%d",&second->data);
+    second->prev=head;
+    second->next = third;
+
+    // Link third and fourth nodes
+    printf("Ener the Data in the Third Node: ");
+    scanf("%d",&third->data);
+    third->prev=second;
+    third->next = fourth;
+
+    // Terminate the list at the fourth node:):)
+    printf("Enter the data in The Fourth Node: ");
+    scanf("%d",&fourth->data);
+    fourth->prev=third;
+    fourth->next = NULL;
+
+    printf("Linked list before  deletion:\n");
+    llt(head);
+    
+    printf("Linked List After Deletion:\n");
+   // struct node *ptr=head;
+ //    head= deleteAtFirst(head);
+ // head=deleteAtIndex(head,2);
+  // head=deleteFromEnd(head);
+head=deleteFromData(head,6);
+    llt(head);
+
+    return 0;
+}
