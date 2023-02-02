@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct stack
+{
+    int size;
+    int top;
+    int *arr;
+};
+
+int isEmpty(struct stack *ptr)
+{
+    if (ptr->top==-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int isFull(struct stack *ptr)
+{
+    if (ptr->top== ptr->size-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void push(struct stack *ptr,int value)
+{
+    if (isFull(ptr))
+    {
+        printf("\nSTACK OVERFLOW\n");
+    }
+    else
+    {
+    ptr->top++;
+    ptr->arr[ptr->top]=value;
+    printf("\n%d Pushed Into stack\n",value);
+}
+}
+
+int pop(struct stack *ptr)
+{
+    if (isEmpty(ptr))
+    {
+        printf("\nSTACK UNDERFLOW!!!\n");
+    }
+    else
+    {
+    int saviour=ptr->arr[ptr->top];
+    ptr->top--;
+    return saviour;
+    }
+}
+
+int main()
+{
+    clrscr();
+    struct stack *s=(struct stack *)malloc(sizeof(struct stack));
+    s->size=5;
+    s->top=-1;
+    s->arr=(int *)malloc(s->size *sizeof(int));
+    push(s,8);
+    push(s,9);
+    push(s,81);
+    push(s,98);
+    push(s,101);
+    push(s,69);
+    push(s,89);
+    printf("\n\t\t\t%d Popped From The stack\n",pop(s));
+    printf("\n\t\t\t%d Popped From The stack\n",pop(s));
+    printf("\n\t\t\t%d Popped From The stack\n",pop(s));
+    printf("\n\t\t\t%d Popped From The stack\n",pop(s));
+    printf("\n\t\t\t%d Popped From The stack\n",pop(s));
+    printf("\n\t\t\t%d Popped From The stack\n",pop(s));
+    printf("\n\t\t\t%d Popped From The stack\n",pop(s));
+    return 0;
+}
