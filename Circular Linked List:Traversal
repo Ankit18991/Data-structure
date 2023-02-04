@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+int data;
+struct node *next;
+};
+
+void linkedlisttraversal(struct node *head)
+{
+printf("%d\n",head->data);
+
+struct node *ptr=head->next;
+while (ptr != head)
+{
+printf("%d\n",ptr->data);
+ptr=ptr->next;
+}
+}
+
+struct node *llReversal(struct node *head)
+{
+struct node *prev=head;
+struct node *cur=head->next;
+struct node *temp=cur->next;
+
+while (cur != head)
+{
+    struct node *temp=cur->next;
+    cur->next=prev;
+    prev=cur;
+    cur=temp;
+    
+}
+head->next=prev;
+return prev;
+}
+
+int main()
+{
+struct node *head=(struct node *)malloc(sizeof(struct node));
+struct node *second=(struct node *)malloc(sizeof(struct node));
+struct node *third=(struct node *)malloc(sizeof(struct node));
+
+    printf("enter data in head node:\n");
+    scanf("%d",&head->data);
+    head->next=second;
+    
+    printf("enter data in second node:\n");
+    scanf("%d",&second->data);
+    second->next=third;
+    
+    printf("enter data in the third node:\n");
+    scanf("%d",&third->data);
+    third->next=head;
+    
+    printf("Our linked List is:\n");
+    
+    linkedlisttraversal(head);
+    printf("Our Reversed Linked List is:\n");
+  struct node *prev=llReversal(head);
+ //   head=llReversal(head);
+    linkedlisttraversal(prev);
+    return 0;
+}
