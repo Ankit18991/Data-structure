@@ -1,0 +1,83 @@
+include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct stack
+{
+    int size;
+    int top;
+    int arr[10];
+};
+
+int isEmpty(struct stack *s)
+{
+    if (s->top==-1)
+    {
+        return 1;
+    }
+    else
+    {
+    return 0;
+    }
+}
+
+int isFull(struct stack *s)
+{
+    if (s->top == s->size-1 || s->top>s->size-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void push(struct stack *s,int val)
+{
+    if (isFull(s))
+    {
+        printf("STACK OVERFLOW !!!\n");
+    }
+    else
+    {
+        s->top++;
+        s->arr[s->top]=val;
+        printf("%d Pushed Into The STACK\n",val);
+    }
+}
+
+int main()
+{
+    clrscr();
+    struct stack *s=(struct stack *)malloc(sizeof(struct stack));
+    s->size=15;
+    s->top=-1;
+    printf("Enter The Elements of The Array in The Stqck:\n");
+    for (int i=0;i<10;i++)
+    {
+        scanf("%d",&s->arr[i]);
+        s->top++;
+    }
+    push(s,9);
+    push(s,78);
+    push(s,7);
+    push(s,89);
+    push(s,88);
+    push(s,77);
+    push(s,9);
+    push(s,9);
+    push(s,11);
+    push(s,67);
+    push(s,88);
+    push(s,23);
+    push(s,8);
+    push(s,7);
+    push(s,9);
+    push(s,11);
+    push(s,90);
+    return 0;
+}
+    
+
+    
