@@ -1,0 +1,126 @@
+#include<stdio.h>
+#include<conio.h>
+    
+    int a[5];
+    int top=-1;
+
+int isEmpty()
+{
+    if (top==-1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int isFull()
+{
+    if (top==4)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+void push(int n)
+{
+    
+    if (isFull())
+    {
+        printf("STACK OVERFLOW\n");
+    }
+    
+    else
+    {   
+    top++;
+    a[top]=n;
+    printf("\n %d PUSHED Into The Stack\n",n);
+}
+}
+
+int pop()
+{
+    if (isEmpty())
+    {
+        printf("STACK UNDERFLOW!!!\n");
+    }
+    else
+    {
+    int res=a[top];
+    top--;
+    printf("%d popped from the Stack\n",res);
+    return res;
+  
+}
+}
+
+int peek(int pos)
+{
+    int index=top-pos+1;
+    if (index<0)
+    {
+        printf("\nINVALID POSITION\n");
+    }
+    else
+    {
+        
+        printf("The value at %d position=%d\n",pos,a[index]);
+        }
+    }
+
+
+void main()
+{
+    clrscr();
+    
+    
+    printf("\n PRESS 1 TO PUSH \n");
+    printf("\n PRESS 2 TO POP \n");
+    printf("\n PRESS 0 TO PEEK \n");
+    
+    
+    for (  ;  ;  )
+    {
+        char choice;
+    printf("\n ENTER YOUR CHOICE \n: ");
+//   scanf("%d",&choice);
+    choice=getch();
+    
+    if (choice=='1')
+    {
+        clrscr();
+        push(67);
+        push(68);
+        push(103);
+        push(89);
+        getch();
+    }
+    
+    else if (choice=='2')
+    {
+        clrscr();
+        pop();
+        getch();
+      //  pop();
+      //  pop();
+       // pop();
+    }
+    
+    else
+    {
+      //  clrscr();
+        peek(1);
+        peek(2);
+        peek(3);
+        peek(4);
+        getch();
+    }
+    }
+    getch();
+}
