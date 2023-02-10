@@ -1,0 +1,115 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+
+struct stack
+{
+    int size;
+    int top;
+    char *arr;
+    };
+    
+ int isEmpty(struct stack *ptr)
+{
+    if (ptr->top==-1)
+    {
+        return 1;
+        }
+     else
+    {
+         return 0;
+        }
+        }
+       
+  int isFull(struct stack *ptr)
+   {
+        if (ptr->top==ptr->size-1)
+        {
+             return 1;
+            }
+         else
+        {
+            return 0;
+            }
+            }
+      
+  void push(struct stack *ptr, char val)
+{
+    if (isFull(ptr))
+    {
+        printf("STACK OVERFLOW HAI BHAI\n");
+        }
+        else
+        {
+            ptr->top++;
+            ptr->arr[ptr->top]=val;
+            }
+            }
+           
+  char pop(struct stack *ptr)//will return character
+{
+    if(isEmpty(ptr))
+    {
+        printf("STACK UNDERFLOW!!\n");
+        }
+        else
+        {
+            char save=ptr->arr[ptr->top];
+            ptr->top--;
+            return save;
+            }
+            }
+           
+  int parenthesisMatching(char *exp)
+{
+    struct stack *ptr=(struct stack *)malloc(sizeof(struct stack));
+    ptr->size=100;
+    ptr->top=-1;
+    ptr->arr=(char *)malloc(ptr->size* sizeof(char));
+    for (int i=0; exp[i]!= '\o';i++)
+    {
+        if (exp[i]=='(')
+        {
+           push(ptr,'(');
+        }
+        else if(exp[i]==')')
+        {
+            if(isEmpty(ptr))
+            {
+                return 0;
+            }
+            
+            pop(ptr);
+            }
+    }
+            
+            if (isEmpty(ptr))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+    
+    }
+    
+    int main()
+    {
+        clrscr();
+        char * exp="(i8÷l()(op)";
+        if (parenthesisMatching(exp))
+        {
+            printf("Parenthsis Is Matching\n");
+            }
+            else
+            {
+                printf("Parenthesis Is Not Matching\n");
+            }
+            return 0;
+            }
+        
+            
+            
+            
+ 
